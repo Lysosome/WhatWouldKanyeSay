@@ -1,0 +1,6 @@
+keras
+tensorflow
+gensim
+numpy
+google-cloud-texttospeech
+language-check
