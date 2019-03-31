@@ -15,9 +15,9 @@ def clean_tweets(name, output):
 
 if __name__ == '__main__':
     # Pass in the name of the txt file created by tweet_dumper.py
-    name = 'iamcardib_tweets.txt'
+    name = 'NICKIMINAJ_tweets.txt'
 
     # Pass in the name of the desired output file
-    output = 'cardib_corpus.txt'
+    output = 'minaj_corpus.txt'
 
     clean_tweets(name, output)

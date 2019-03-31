@@ -13,10 +13,12 @@ import language_check
 import random
 from google.cloud import texttospeech
 from text_generation import generate_text
+import os
 
 NUM_CLOSEST = 10 # number of closest words to use
 CHAR_INPUT_LEN = 40 # number of chars the model takes
 PERSONALITIES = ["kanye", "nietzsche"]
+MODEL_WARMUP = True
 
 def build_model(num_chars):
     model = Sequential()
@@ -26,13 +28,16 @@ def build_model(num_chars):
 
 @app.route('/')
 def index():
-    return render_template('./templates/index.html')
+    return render_template('index.html')
 
 @app.route('/result_page', methods = ['GET', 'POST'])
 def result():
     personality = str(request.form.get('personality'))
     prompt = str(request.form.get('prompt'))
 
+    # model = build_model(len(char_indices_dict[personality]))
+    # MODEL_FILE = "../models/" + personality + ".h5"
+    # model.load_weights(MODEL_FILE)
     # Generate Text
     generated_text = generate_text(
                         models[personality],
@@ -43,18 +48,21 @@ def result():
                         min_length=100,
                         max_length=200)
 
-    picture = "./assets/" + personality + ".jpg"
+    picture = "../assets/" + personality + ".jpg"
     print("GENERATED TEXT: "+generated_text)
     print("PICTURE: "+picture)
-    return render_template('./templates/results_page.html', pic_url=picture, text=generated_text)
+    return render_template('result_page.html', pic_url=picture, text=generated_text)
 
 if __name__ == '__main__':
+    # os.environ['THEANO_FLAGS'] = "device=cuda,floatX=float32"
     # Initialize
+
     models = {}
     char_indices_dict = {}
     indices_char_dict = {}
     for personality in PERSONALITIES:
-        print("Loading dicts and models for personality '"+personality+"'...")
+
+        print("Loading models and dicts for personality '"+personality+"'...")
         # 1. load all Char-Index dictionaries
         CHAR_INDEX_FILE = "../models/char_index_" + personality + ".p"
         with open(CHAR_INDEX_FILE, "rb") as f:
@@ -65,11 +73,16 @@ if __name__ == '__main__':
         model = build_model(len(char_indices_dict[personality]))
         MODEL_FILE = "../models/" + personality + ".h5"
         model.load_weights(MODEL_FILE)
+        if(MODEL_WARMUP): # warm up the model before using it to speed up inference later
+            print("warming up "+personality+" model...")
+            model.predict(np.zeros((1, CHAR_INPUT_LEN, len(char_indices_dict[personality]))), verbose=0)
         models[personality] = model
+
+
 
     print("Loading word vectors...")
     # 3. load word vectors
-    word_vectors = api.load("glove-wiki-gigaword-100")
+    word_vectors = api.load("glove-wiki-gigaword-50") #("glove-wiki-gigaword-100")
 
     print("Starting server...")
     # Start fielding requests

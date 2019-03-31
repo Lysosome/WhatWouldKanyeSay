@@ -8,6 +8,7 @@ from keras.layers import Dense, LSTM
 import language_check
 import random
 from google.cloud import texttospeech
+import time
 
 PERSONALITY = "kanye"
 NUM_CLOSEST = 10 # number of closest words to use
@@ -66,6 +67,7 @@ def generate_text(model,
     print("input sequence: " + modified_prompt)
 
     # 2. GENERATE NEW CHARS ONE BY ONE UNTIL LENGTH IS HIT
+    start_time = time.time()
     output = prompt
     doneYet = False
     while not doneYet:
@@ -98,6 +100,9 @@ def generate_text(model,
         # check if done yet
         if( (len(output)>max_length) or (len(output)>min_length and output[-2:]==". ") ):
             doneYet = True
+
+    elapsed_time = time.time() - start_time
+    print("Time elapsed for text generation:", elapsed_time)
 
     # 3. RUN GRAMMAR / SPELL CHECK
     if(grammar_check):
