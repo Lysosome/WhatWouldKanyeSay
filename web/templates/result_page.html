@@ -3,6 +3,8 @@
 <html>
   <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link href='https://fonts.googleapis.com/css?family=Oswald:300' rel='stylesheet' type='text/css'>
   </head>
 
   <style>
@@ -16,8 +18,8 @@
       max-height: 100px;
       left: 255px;
       top: 230px;
-	  font-family: 'Open Sans', sans-serif;
-	  font-size: 2em;
+	    font-family: 'Open Sans', sans-serif;
+	    font-size: 2em;
     }
 
     .bottomright {
@@ -39,18 +41,33 @@
       min-width: 100%;
       min-height: 100%;
     }
+
+    .footer {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+    }
   </style>
+
   <body>
     <div>
       <img src="{{pic_url}}" class ="img-fluid" id="bg" alt="Responsive image">
       <!-- <img src="{{pic_url}}" class="img-fluid" id="bg" alt="Responsive image" -->
-    <div>
+    </div>
     
     <div class="container">
       <div align="center">
-        <div class="box" style="color:white">{{text}}
+        <div class="box" style="color:white">{{text}}</div>
       </div>
-        <!-- <div class ="box" style="color:white>{{text}}</div>-->
+    </div>
+
+    <div class="footer">
+      <div class="bottomright">
+        <button type="button" class="btn btn-outline-light">Home
+          <a href="/"></a>
+        </button>
       </div>
     </div>
   </body>
