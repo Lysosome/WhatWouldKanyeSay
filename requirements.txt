@@ -1,5 +1,5 @@
 keras
-tensorflow
+theano
 gensim
 numpy
 google-cloud-texttospeech
