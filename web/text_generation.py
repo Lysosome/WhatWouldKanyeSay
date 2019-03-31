@@ -114,7 +114,7 @@ def generate_text(model,
         return corrected_output+"..."
     return output+"..."
 
-def text_to_speech(words):
+def text_to_speech(words, out_fname):
     # Instantiates a client
     client = texttospeech.TextToSpeechClient()
 
@@ -136,7 +136,6 @@ def text_to_speech(words):
     response = client.synthesize_speech(synthesis_input, voice, audio_config)
 
     # The response's audio_content is binary.
-    out_fname = AUDIO_FNAME
     with open(out_fname, 'wb') as out:
         # Write the response to the output file.
         out.write(response.audio_content)
@@ -156,7 +155,7 @@ def main():
     print(out)
 
     # text-to-speech
-    text_to_speech(out)
+    text_to_speech(out, AUDIO_FNAME)
 
 if(__name__=="__main__"):
     main()

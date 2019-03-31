@@ -59,7 +59,14 @@
     
     <div class="container">
       <div align="center">
-        <div class="box" style="color:white">{{text}}</div>
+        <div class="box" style="color:white">
+			{{text}}
+			<br />
+			<br />
+			<audio controls>
+				<source src="{{ song }}" type="audio/mpeg">
+			</audio>
+		</div>
       </div>
     </div>
 

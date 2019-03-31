@@ -10,7 +10,7 @@ from keras.layers import Dense, LSTM
 import language_check
 import random
 from google.cloud import texttospeech
-from text_generation import generate_text
+from text_generation import generate_text, text_to_speech
 import os
 
 NUM_CLOSEST = 10 # number of closest words to use
@@ -46,10 +46,14 @@ def result():
                         min_length=200,
                         max_length=250)
 
+    # Text To Speech
+    audio_fname = "./static/"+personality+".mp3"
+    text_to_speech(generated_text, audio_fname)
+
     picture = "https://github.com/Lysosome/WhatWouldKanyeSay/raw/master/web/assets/" + personality + ".jpg"
     print("GENERATED TEXT: "+generated_text)
     print("PICTURE: "+picture)
-    return render_template('result_page.html', pic_url=picture, text=generated_text)
+    return render_template('result_page.html', pic_url=picture, text=generated_text, song=audio_fname)
 
 if __name__ == '__main__':
     # os.environ['THEANO_FLAGS'] = "device=cuda,floatX=float32"
