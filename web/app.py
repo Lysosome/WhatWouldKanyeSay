@@ -6,7 +6,6 @@ import keras
 import gensim.downloader as api
 import numpy as np
 import pickle
-import keras
 from keras.models import Sequential
 from keras.layers import Dense, LSTM
 import language_check
@@ -17,7 +16,7 @@ import os
 
 NUM_CLOSEST = 10 # number of closest words to use
 CHAR_INPUT_LEN = 40 # number of chars the model takes
-PERSONALITIES = ["kanye", "nietzsche"]
+PERSONALITIES = ["kanye", "nietzsche", "cardib", "shakespeare", "tolkien", "tyson"] #todo: add poe
 MODEL_WARMUP = True
 
 def build_model(num_chars):
