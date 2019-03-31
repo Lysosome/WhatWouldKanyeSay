@@ -114,7 +114,7 @@ def generate_text(model,
         return corrected_output+"..."
     return output+"..."
 
-def text_to_speech(words, out_fname):
+def text_to_speech(words, out_fname, area="en-US", gender="male"):
     # Instantiates a client
     client = texttospeech.TextToSpeechClient()
 
@@ -123,9 +123,13 @@ def text_to_speech(words, out_fname):
 
     # Build the voice request, select the language code ("en-US") and the ssml
     # voice gender ("neutral")
+    if(gender=="male"):
+        gender_param = texttospeech.enums.SsmlVoiceGender.MALE
+    else:
+        gender_param = texttospeech.enums.SsmlVoiceGender.FEMALE
     voice = texttospeech.types.VoiceSelectionParams(
-        language_code='en-GB',
-        ssml_gender=texttospeech.enums.SsmlVoiceGender.NEUTRAL)
+        language_code=area,
+        ssml_gender=gender_param)
 
     # Select the type of audio file you want returned
     audio_config = texttospeech.types.AudioConfig(

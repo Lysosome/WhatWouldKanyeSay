@@ -33,9 +33,19 @@ def result():
     personality = str(request.form.get('personality'))
     prompt = str(request.form.get('prompt'))
 
-    # model = build_model(len(char_indices_dict[personality]))
-    # MODEL_FILE = "../models/" + personality + ".h5"
-    # model.load_weights(MODEL_FILE)
+    area = "en-US"
+    gender = "male"
+    autocorrect_on = True
+
+    if(personality=="cardib"):
+        autocorrect_on = False
+    if(personality=="shakespeare" or personality=="tolkien"):
+        area = "en-GB"
+    if(personality=="nietzsche"):
+        area="de-DE"
+    if(personality=="cardib"):
+        gender="female"
+
     # Generate Text
     generated_text = generate_text(
                         models[personality],
@@ -44,11 +54,13 @@ def result():
                         char_indices_dict[personality],
                         indices_char_dict[personality],
                         min_length=200,
-                        max_length=250)
+                        max_length=250,
+                        grammar_check=autocorrect_on)
 
     # Text To Speech
-    audio_fname = "./static/"+personality+".mp3"
-    text_to_speech(generated_text, audio_fname)
+    rand = str(random.randint(0, 1e4)) # add a random number to prevent cache reusing old files with same name
+    audio_fname = "./static/"+personality+"_"+prompt+"_"+rand+".mp3"
+    text_to_speech(generated_text, audio_fname, area=area, gender=gender)
 
     picture = "https://github.com/Lysosome/WhatWouldKanyeSay/raw/master/web/assets/" + personality + ".jpg"
     print("GENERATED TEXT: "+generated_text)
