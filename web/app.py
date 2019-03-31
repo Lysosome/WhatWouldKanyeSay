@@ -48,7 +48,7 @@ def result():
                         min_length=100,
                         max_length=200)
 
-    picture = "../assets/" + personality + ".jpg"
+    picture = "https://github.com/Lysosome/WhatWouldKanyeSay/raw/master/web/assets/" + personality + ".jpg"
     print("GENERATED TEXT: "+generated_text)
     print("PICTURE: "+picture)
     return render_template('result_page.html', pic_url=picture, text=generated_text)
