@@ -1,5 +1,6 @@
 @charset "ISO-8859-1";
-@import url('https://fonts.googleapis.com/css?family=Open+Sans')
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC');
 @import url("//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css");
 
 /* Benjamin Ma */
@@ -7,10 +8,18 @@
 /* Styles */
 
 html {
-	background-image: url(../assets/leaves-pattern.png);
+	background-image: url(../assets/dust_scratches.png);
 	background-repeat: repeat; 
 }
 
+.title {
+	font-family: 'Amatic SC', sans-serif;
+	width: 100%
+	font-size: 6em;
+	text-align: right;
+	padding-right: 50px;
+}
+	
 .big {
     font-family: 'Open Sans';
     margin: 50px;
@@ -37,4 +46,18 @@ select {
 	font-size: 100%;
 	width: 50%;
 	background: transparent;
+}
+
+.button {
+	background: transparent;
+	border: none;
+	color: black;
+	text-align: center;
+	font-family: 'Open Sans';
+	display: inline-block;
+	font-size: 50%;
+}
+
+.button:hover {
+	color: gray; 
 }
