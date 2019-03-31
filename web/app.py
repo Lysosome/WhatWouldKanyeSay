@@ -45,8 +45,8 @@ def result():
                         word_vectors,
                         char_indices_dict[personality],
                         indices_char_dict[personality],
-                        min_length=100,
-                        max_length=200)
+                        min_length=200,
+                        max_length=250)
 
     picture = "https://github.com/Lysosome/WhatWouldKanyeSay/raw/master/web/assets/" + personality + ".jpg"
     print("GENERATED TEXT: "+generated_text)

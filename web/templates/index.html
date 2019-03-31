@@ -11,7 +11,71 @@
   <link rel="apple-touch-icon" href="icon.png">
   <!-- Place favicon.ico in the root directory -->
 
-  <link rel="stylesheet" href="https://raw.githubusercontent.com/Lysosome/WhatWouldKanyeSay/master/web/css/ModernClean.css">
+  <style>
+  @charset "ISO-8859-1";
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC');
+@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css");
+
+/* Benjamin Ma */
+
+/* Styles */
+
+html {
+	background-image: url(../assets/dust_scratches.png);
+	background-repeat: repeat; 
+}
+
+.title {
+	font-family: 'Amatic SC', sans-serif;
+	width: 100%;
+	font-size: 3em;
+	text-align: right;
+	padding-right: 50px;
+}
+	
+.big {
+    font-family: 'Open Sans';
+    margin: 50px;
+    padding: 0px;
+    width: 100%;
+	font-size: 7em;
+	line-height: 150px;
+}
+
+select {
+	font-size: 100%;
+	border:0px;
+	outline:0px;
+	font-family: 'Open Sans';
+	text-decoration: underline;
+	background: transparent;
+}
+
+#prompt {
+	border:0px;
+	outline:0px;
+	border-bottom: 10px solid black;
+	font-family: 'Open Sans';
+	font-size: 100%;
+	width: 50%;
+	background: transparent;
+}
+
+.button {
+	background: transparent;
+	border: none;
+	color: black;
+	text-align: center;
+	font-family: 'Open Sans';
+	display: inline-block;
+	font-size: 50%;
+}
+
+.button:hover {
+	color: gray; 
+}
+</style>
 
   <meta name="theme-color" content="#fafafa">
 </head>
@@ -38,7 +102,20 @@
 		<input type="submit" value="Go" class="button" />
 	</form>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<script src="../js/cycle.js"></script>
+	<script>
+	var divs = $('div[id^="content-"]').hide(),
+	i = 0;
+
+(function cycle() { 
+
+	divs.eq(i).fadeIn(1000)
+			  .delay(2000)
+			  .fadeOut(1000, cycle);
+
+	i = ++i % divs.length;
+
+})();
+	</script>
 </body>
 
 </html>

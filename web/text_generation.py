@@ -98,8 +98,9 @@ def generate_text(model,
                 modified_prompt = modified_prompt[len(word_to_add):] + word_to_add
 
         # check if done yet
-        if( (len(output)>max_length) or (len(output)>min_length and output[-2:]==". ") ):
+        if( (len(output)>max_length) or (len(output)>min_length and output[-1]==' ') ):
             doneYet = True
+            output = output[:-1]
 
     elapsed_time = time.time() - start_time
     print("Time elapsed for text generation:", elapsed_time)
@@ -110,8 +111,8 @@ def generate_text(model,
         matches = tool.check(output)
         corrected_output = language_check.correct(output, matches)
         print("Number of grammar errors corrected:", len(matches))
-        return corrected_output
-    return output
+        return corrected_output+"..."
+    return output+"..."
 
 def text_to_speech(words):
     # Instantiates a client
