@@ -6,11 +6,35 @@
 
 /* Styles */
 
+html {
+	background-image: url(../assets/leaves-pattern.png);
+	background-repeat: repeat; 
+}
+
 .big {
     font-family: 'Open Sans';
     margin: 50px;
     padding: 0px;
     width: 100%;
-	font-size: 8em;
+	font-size: 7em;
 	line-height: 150px;
+}
+
+select {
+	font-size: 100%;
+	border:0px;
+	outline:0px;
+	font-family: 'Open Sans';
+	text-decoration: underline;
+	background: transparent;
+}
+
+#prompt {
+	border:0px;
+	outline:0px;
+	border-bottom: 10px solid black;
+	font-family: 'Open Sans';
+	font-size: 100%;
+	width: 50%;
+	background: transparent;
 }
