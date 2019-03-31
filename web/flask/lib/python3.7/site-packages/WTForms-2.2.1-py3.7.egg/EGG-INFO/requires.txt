@@ -1,0 +1,3 @@
+
+[locale]
+Babel>=1.3
