@@ -1,4 +1,4 @@
-#!/Users/artsyy/Projects/lahacks/flask/bin/python
+#!/Users/artsyy/Projects/lahacks/WhatWouldKanyeSay/web/flask/bin/python
 
 import sys
 import getopt
