@@ -15,7 +15,7 @@ import os
 
 NUM_CLOSEST = 10 # number of closest words to use
 CHAR_INPUT_LEN = 40 # number of chars the model takes
-PERSONALITIES = ["kanye", "nietzsche", "cardib", "shakespeare", "tolkien", "tyson"] #todo: add poe
+PERSONALITIES = ["kanye", "nietzsche", "cardib", "shakespeare", "tolkien", "tyson", "poe"]
 MODEL_WARMUP = True
 
 def build_model(num_chars):
@@ -31,7 +31,7 @@ def index():
 @app.route('/result_page', methods = ['GET', 'POST'])
 def result():
     personality = str(request.form.get('personality'))
-    prompt = str(request.form.get('prompt'))
+    prompt = (str(request.form.get('prompt'))).lower()
 
     area = "en-US"
     gender = "male"
@@ -63,6 +63,7 @@ def result():
     text_to_speech(generated_text, audio_fname, area=area, gender=gender)
 
     picture = "https://github.com/Lysosome/WhatWouldKanyeSay/raw/master/web/assets/" + personality + ".jpg"
+    # picture = "./assets/" + personality + ".jpg"
     print("GENERATED TEXT: "+generated_text)
     print("PICTURE: "+picture)
     return render_template('result_page.html', pic_url=picture, text=generated_text, song=audio_fname)

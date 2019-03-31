@@ -54,6 +54,9 @@ def generate_text(model,
                   grammar_check = True):
     print("Generating text from prompt "+prompt)
 
+    inVocabFlag = False
+    close_words = []
+
     # 1. (OPTIONAL) SEED PROMPT WITH RELATED WORDS
     try:
         # close_words is a list of just the words in descending order
@@ -61,6 +64,7 @@ def generate_text(model,
         close_words_rev = reversed(close_words) # now ascending order of closeness
         modified_prompt = " ".join(close_words_rev) + " " + prompt
         modified_prompt = modified_prompt[-(CHAR_INPUT_LEN-1):] + " " # only keep the last CHAR_INPUT_LEN characters
+        inVocabFlag = True
     except KeyError:
         print("error: prompt '"+prompt+"' not in vocabulary")
         modified_prompt = prompt
@@ -68,7 +72,7 @@ def generate_text(model,
 
     # 2. GENERATE NEW CHARS ONE BY ONE UNTIL LENGTH IS HIT
     start_time = time.time()
-    output = prompt
+    output = prompt + " "
     doneYet = False
     while not doneYet:
         # parse input string into chars
@@ -86,8 +90,9 @@ def generate_text(model,
         else:
             modified_prompt += next_char
 
+
         # if we're interspersing words, we can check here.
-        if(word_scatter):
+        if(word_scatter and inVocabFlag):
             word_to_add=""
             if(next_char==" " and random.random() < 0.1):
                 word_to_add = close_words[random.randint(0, NUM_CLOSEST - 1)] # TODO: EDIT WORD PICKING DISTRIBUTION?
