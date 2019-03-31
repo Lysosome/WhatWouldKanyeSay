@@ -40,7 +40,7 @@ def sample(preds, temperature=1.0):
 # min_length = minimum number of chars for the model to generate (once this is hit, it will terminate on sentence end)
 # max_length = max number of chars (HARD CAP--will stop generating after this number)
 # word_scatter = whether to pepper related words throughout the generated text or not
-# language_check = whether to apply spelling and grammar check
+# grammar_check = whether to apply spelling and grammar check
 def generate_text(model,
                   prompt,
                   word_vectors,
@@ -50,7 +50,7 @@ def generate_text(model,
                   min_length=250,
                   max_length=400,
                   word_scatter = True,
-                  language_check = True):
+                  grammar_check = True):
     print("Generating text from prompt "+prompt)
 
     # 1. (OPTIONAL) SEED PROMPT WITH RELATED WORDS
@@ -100,7 +100,7 @@ def generate_text(model,
             doneYet = True
 
     # 3. RUN GRAMMAR / SPELL CHECK
-    if(language_check):
+    if(grammar_check):
         tool = language_check.LanguageTool('en-US')
         matches = tool.check(output)
         corrected_output = language_check.correct(output, matches)

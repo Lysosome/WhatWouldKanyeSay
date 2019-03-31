@@ -26,7 +26,7 @@ def build_model(num_chars):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('./templates/index.html')
 
 @app.route('/result_page', methods = ['GET', 'POST'])
 def result():
@@ -39,22 +39,27 @@ def result():
                         prompt,
                         word_vectors,
                         char_indices_dict[personality],
-                        indices_char_dict[personality])
+                        indices_char_dict[personality],
+                        min_length=100,
+                        max_length=200)
 
     picture = "./assets/" + personality + ".jpg"
-    return render_template('results_page.html', pic_url=picture, text=generated_text)
+    print("GENERATED TEXT: "+generated_text)
+    print("PICTURE: "+picture)
+    return render_template('./templates/results_page.html', pic_url=picture, text=generated_text)
 
 if __name__ == '__main__':
     # Initialize
     models = {}
     char_indices_dict = {}
     indices_char_dict = {}
-    for personality in personities:
+    for personality in PERSONALITIES:
+        print("Loading dicts and models for personality '"+personality+"'...")
         # 1. load all Char-Index dictionaries
         CHAR_INDEX_FILE = "../models/char_index_" + personality + ".p"
         with open(CHAR_INDEX_FILE, "rb") as f:
             char_indices_dict[personality] = pickle.load(f)
-            indices_char_dict[personality] = {v: k for k, v in char_indices.items()}
+            indices_char_dict[personality] = {v: k for k, v in char_indices_dict[personality].items()}
 
         # 2. load all Char-RNN models
         model = build_model(len(char_indices_dict[personality]))
@@ -62,8 +67,10 @@ if __name__ == '__main__':
         model.load_weights(MODEL_FILE)
         models[personality] = model
 
+    print("Loading word vectors...")
     # 3. load word vectors
     word_vectors = api.load("glove-wiki-gigaword-100")
 
+    print("Starting server...")
     # Start fielding requests
     app.run(debug = True)
