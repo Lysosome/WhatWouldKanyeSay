@@ -17,7 +17,13 @@
 </head>
 
 <body>
-  <h1>What would Kanye Say? (put animation here).</h1>
+	<h1 class="title">What would
+	<div id="content-1">Kanye</div>
+	<div id="content-2">Shakespeare</div>
+	<div id="content-3">Nietzsche</div>
+	<div id="content-4">Cardi B</div>
+	Say?</h1>
+	
 	<form id="ask" action="./result" method="POST" class="big">
 		Ask
 		<select name="personality" id="personality" required>
@@ -29,8 +35,10 @@
 		<br />
 		about <input type="textbox" name="prompt" id="prompt" required />.
 		<br />
-		<input type="submit" value="Go" />
+		<input type="submit" value="Go" class="button" />
 	</form>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="../js/cycle.js"></script>
 </body>
 
 </html>
