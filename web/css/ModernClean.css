@@ -1,0 +1,16 @@
+@charset "ISO-8859-1";
+@import url('https://fonts.googleapis.com/css?family=Open+Sans')
+@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css");
+
+/* Benjamin Ma */
+
+/* Styles */
+
+.big {
+    font-family: 'Open Sans';
+    margin: 50px;
+    padding: 0px;
+    width: 100%;
+	font-size: 8em;
+	line-height: 150px;
+}
