@@ -13,5 +13,6 @@ All of our frontend and backend code can be found in `/web/`.  Navigate to the `
 <h4> Our favorite quotes: </h4>
 
 "Now not the beauty and the angel, all things are still and sounded around.  
-It's in the shadow of the sun and the angel of the sea," -- Generated from Edgar Allen Poe 
+It's in the shadow of the sun and the angel of the sea," -- Generated from Edgar Allen Poe
+
 "Orange juice like vanilla bout lemon' " -- Cardi B
